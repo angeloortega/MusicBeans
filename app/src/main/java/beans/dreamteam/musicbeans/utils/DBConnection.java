@@ -1,20 +1,20 @@
 package beans.dreamteam.musicbeans.utils;
 import android.content.Context;
 import android.os.StrictMode;
-import android.widget.Toast;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import beans.dreamteam.musicbeans.model.*;
 
 public class DBConnection {
-    public static Connection connectionDB(Context currentContext){
+    public static Connection connectionDB(){
         Connection conexion = null;
         try{
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -23,17 +23,17 @@ public class DBConnection {
             conexion = DriverManager.getConnection("jdbc:jtds:sqlserver://registrocivil.database.windows.net:1433/MusicBeans;user=leyendas;password=Angelo12345678;");
         }
         catch(Exception e){
-            Toast.makeText(currentContext,e.getMessage(), Toast.LENGTH_LONG).show();
+            return null;
         }
         return conexion;
     }
 
-    public static Usuario getUsuario(Context currentContext, String userName, String password){
+    public static Usuario getUsuario( String userName, String password){
         Usuario user = new Usuario(-1,null,null,null,null,
                 null,null,null,null);
         try{
             int pos = 0;
-            PreparedStatement pst = connectionDB(currentContext).prepareStatement
+            PreparedStatement pst = connectionDB().prepareStatement
                     ("select * from Usuario where correo = ? and contrasenha = ?");
             pst.setString(1,userName);
             pst.setString(2,password);
@@ -49,15 +49,15 @@ public class DBConnection {
             }
         }
         catch (Exception e){
-            Toast.makeText(currentContext,"Ocurrio un error en la BD", Toast.LENGTH_SHORT).show();
+            return null;
         }
         return user;
     }
-    public static Comentario getComentario (Context currentContext, int idComentario){
+    public static Comentario getComentario ( int idComentario){
 
         Comentario comentario = new Comentario(-1,-1,-1,"",null);
         try {
-            PreparedStatement pst2 = connectionDB(currentContext).prepareStatement
+            PreparedStatement pst2 = connectionDB().prepareStatement
                     ("select * from Comentario where idComentario = ?");
             pst2.setInt(1, idComentario);
             ResultSet rs2 = pst2.executeQuery();
@@ -68,15 +68,15 @@ public class DBConnection {
             }
         }
         catch(Exception e){
-            Toast.makeText(currentContext,"Ocurrio un error en la BD", Toast.LENGTH_SHORT).show();
+            return null;
         }
         return comentario;
     }
 
-    public static Evento getEvento(Context currentContext, int idEvento){
+    public static Evento getEvento( int idEvento){
         Evento evento = new Evento();
         try{
-            PreparedStatement pst = connectionDB(currentContext).prepareStatement
+            PreparedStatement pst = connectionDB().prepareStatement
                     ("select * from Noticia where idEvento = ?");
             pst.setInt(1,idEvento);
             ResultSet rs = pst.executeQuery();
@@ -91,15 +91,15 @@ public class DBConnection {
             }
         }
         catch (Exception e){
-            Toast.makeText(currentContext,"Ocurrio un error en la BD", Toast.LENGTH_SHORT).show();
+            return null;
         }
         return evento;
     }
 
-    public static Noticia getNoticia(Context currentContext, int idNoticia){
+    public static Noticia getNoticia( int idNoticia){
         Noticia noticia = new Noticia();
         try{
-            PreparedStatement pst = connectionDB(currentContext).prepareStatement
+            PreparedStatement pst = connectionDB().prepareStatement
                     ("select * from Noticia where idNoticia = ?");
             pst.setInt(1,idNoticia);
             ResultSet rs = pst.executeQuery();
@@ -110,20 +110,20 @@ public class DBConnection {
                 noticia.setIdNoticia(rs.getInt("idNoticia"));
                 noticia.setFecha(rs.getDate("fecha"));
                 noticia.setFoto(rs.getBytes("foto"));
-                noticia.setComentarios(getComentarios(currentContext, noticia.getIdNoticia()));
+                noticia.setComentarios(getComentarios( noticia.getIdNoticia()));
             }
         }
         catch (Exception e){
-            Toast.makeText(currentContext,"Ocurrio un error en la BD", Toast.LENGTH_SHORT).show();
+            return null;
         }
         return noticia;
     }
 
-    public static Articulo getArticulo(Context currentContext, int idArticulo){
+    public static Articulo getArticulo( int idArticulo){
         Articulo articulo = new Articulo(-1,-1,"","","",-1,0,
                 null,0,null);
         try {
-            PreparedStatement pst2 = connectionDB(currentContext).prepareStatement
+            PreparedStatement pst2 = connectionDB().prepareStatement
                     ("select * from Articulo where idArticulo = ?");
             pst2.setInt(1, idArticulo);
             ResultSet rs2 = pst2.executeQuery();
@@ -140,34 +140,34 @@ public class DBConnection {
             }
         }
         catch(Exception e){
-            Toast.makeText(currentContext,"Ocurrio un error en la BD", Toast.LENGTH_SHORT).show();
+            return null;
         }
         return articulo;
     }
-    public static Carrito getCarrito(Context currentContext, int idUsuario){
+    public static Carrito getCarrito( int idUsuario){
         Carrito carrito = new Carrito();
         ArrayList<Articulo> articulos = new ArrayList<>();
         try{
-            PreparedStatement pst = connectionDB(currentContext).prepareStatement
+            PreparedStatement pst = connectionDB().prepareStatement
                     ("select * from Carrito where idUsuario = ?");
             pst.setInt(1,idUsuario);
             ResultSet rs = pst.executeQuery();
             while(rs.next()) {
                 carrito.setIdUsuario(rs.getInt("idUsuario"));
-                articulos.add(getArticulo(currentContext, rs.getInt("idArticulo")));
+                articulos.add(getArticulo( rs.getInt("idArticulo")));
             }
             carrito.setArticulos(articulos);
         }
         catch (Exception e){
-            Toast.makeText(currentContext,"Ocurrio un error en la BD", Toast.LENGTH_SHORT).show();
+            return null;
         }
         return carrito;
     }
 
-    public static ArrayList<Comentario> getComentarios (Context currentContext, int idNoticia){
+    public static ArrayList<Comentario> getComentarios ( int idNoticia){
         ArrayList<Comentario> comentarios = new ArrayList<>();
         try{
-            PreparedStatement pst = connectionDB(currentContext).prepareStatement
+            PreparedStatement pst = connectionDB().prepareStatement
                     ("select * from Comentario where idNoticia = ?");
             pst.setInt(1,idNoticia);
             ResultSet rs = pst.executeQuery();
@@ -178,15 +178,15 @@ public class DBConnection {
             }
         }
         catch (Exception e){
-            Toast.makeText(currentContext,"Ocurrio un error en la BD", Toast.LENGTH_SHORT).show();
+            return null;
         }
         return comentarios;
     }
 
-    public static ArrayList<Integer> getFavoritos(Context currentContext, int idUsuario){
+    public static ArrayList<Integer> getFavoritos( int idUsuario){
         ArrayList<Integer> favoritos = new ArrayList<>();
         try{
-        PreparedStatement pst = connectionDB(currentContext).prepareStatement
+        PreparedStatement pst = connectionDB().prepareStatement
                     ("select * from Favorito where idUsuario = ?");
             pst.setInt(1,idUsuario);
             ResultSet rs = pst.executeQuery();
@@ -196,14 +196,14 @@ public class DBConnection {
             }
         }
         catch (Exception e){
-            Toast.makeText(currentContext,"Ocurrio un error en la BD", Toast.LENGTH_SHORT).show();
+            return null;
         }
         return favoritos;
     }
-    public static ArrayList<Integer> getCalificaciones(Context currentContext, int idBanda){
+    public static ArrayList<Integer> getCalificaciones( int idBanda){
         ArrayList<Integer> calificaciones = new ArrayList<>();
         try{
-            PreparedStatement pst = connectionDB(currentContext).prepareStatement
+            PreparedStatement pst = connectionDB().prepareStatement
                     ("select * from Calificacion where idBanda = ?");
             pst.setInt(1,idBanda);
             ResultSet rs = pst.executeQuery();
@@ -213,15 +213,15 @@ public class DBConnection {
             }
         }
         catch (Exception e){
-            Toast.makeText(currentContext,"Ocurrio un error en la BD", Toast.LENGTH_SHORT).show();
+            return null;
         }
         return calificaciones;
     }
 
-    public static Muestra getMuestra(Context currentContext, int idUsuario){
+    public static Muestra getMuestra( int idUsuario){
         Muestra muestra = new Muestra(-1,"","");
         try{
-            PreparedStatement pst = connectionDB(currentContext).prepareStatement
+            PreparedStatement pst = connectionDB().prepareStatement
                     ("select * from Muestra where idUsuario = ?");
             pst.setInt(1,idUsuario);
             ResultSet rs = pst.executeQuery();
@@ -232,44 +232,44 @@ public class DBConnection {
             }
         }
         catch (Exception e){
-            Toast.makeText(currentContext,"Ocurrio un error en la BD", Toast.LENGTH_SHORT).show();
+            return null;
         }
         return muestra;
     }
-    public static boolean login(Context currentContext, String user, String password){
+    public static boolean login( String user, String password){
         try{
             CallableStatement cstmt = null;
 
-            cstmt = connectionDB(currentContext).prepareCall
+            cstmt = connectionDB().prepareCall
                     ("exec userLogin ?,?");
             cstmt.setString(1,user);
             cstmt.setString(2,password);
             boolean result = cstmt.execute();
             if(result) {
                 ResultSet rs = cstmt.getResultSet();
-
                 if(rs.next()) {
-                    if(rs.getInt("result") == 1){
-                            Toast.makeText(currentContext,"LogIn Exitoso", Toast.LENGTH_LONG).show();
+                    if (rs.getInt("result") == 1) {
                         return true;
                     }
-                    else{
-                        Toast.makeText(currentContext,"Intento de LogIn Invalido", Toast.LENGTH_LONG).show();
-                        return false;
-                    }
                 }
-                else{
-                    Toast.makeText(currentContext,"Intento de LogIn Invalido", Toast.LENGTH_LONG).show();
-
-                }
-            }
-            else{
-                Toast.makeText(currentContext,"Intento de LogIn Invalido", Toast.LENGTH_LONG).show();
-
             }
         }
         catch (Exception e){
-            Toast.makeText(currentContext,"Intento de LogIn Invalido", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return false;
+    }
+
+    public static boolean signup( String user, String fullName, String password){
+        try{
+            Statement cstmt = null;
+            cstmt = connectionDB().createStatement();
+            int result = cstmt.executeUpdate("insert into Usuario values ('"+fullName+"', '"+user+"', '"+password+"', 'Cliente', null,null,null,null)");
+            if(result > 0) {
+                return true;
+            }
+        }
+        catch (Exception e){
         }
         return false;
     }

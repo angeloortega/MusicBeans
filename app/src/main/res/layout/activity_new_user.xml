@@ -22,7 +22,7 @@
 
 
         <EditText
-            android:id="@+id/login_edUserName"
+            android:id="@+id/new_user_edUserName"
             android:layout_width="280dp"
             android:layout_height="40dp"
             android:layout_below="@+id/imageView"
@@ -30,9 +30,10 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="56dp"
+
             android:background="#FFFFFF"
-            android:drawableLeft="@drawable/username_icon"
-            android:drawableStart="@drawable/username_icon"
+            android:drawableLeft="@drawable/correo_icon"
+            android:drawableStart="@drawable/correo_icon"
             android:ems="10"
             android:fontFamily="sans-serif"
             android:hint="@string/login_username_hint"
@@ -50,12 +51,40 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <EditText
-            android:id="@+id/login_edUserPassword"
+            android:id="@+id/new_user_edName"
             android:layout_width="280dp"
             android:layout_height="40dp"
-            android:layout_alignLeft="@+id/login_edUserName"
-            android:layout_alignStart="@+id/login_edUserName"
-            android:layout_below="@+id/login_edUserName"
+            android:layout_below="@+id/new_user_edUserName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:background="#FFFFFF"
+            android:drawableLeft="@drawable/username_icon"
+            android:drawableStart="@drawable/username_icon"
+            android:ems="10"
+            android:fontFamily="sans-serif"
+            android:hint="@string/login_name_hint"
+            android:inputType="textPersonName"
+            android:paddingBottom="0dp"
+            android:paddingEnd="0dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingStart="0dp"
+            android:paddingTop="0dp"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/new_user_edUserName" />
+
+        <EditText
+            android:id="@+id/new_user_edUserPassword"
+            android:layout_width="280dp"
+            android:layout_height="40dp"
+            android:layout_alignLeft="@+id/new_user_edName"
+            android:layout_alignStart="@+id/new_user_edName"
+            android:layout_below="@+id/new_user_edName"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
@@ -76,26 +105,26 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_edUserName" />
+            app:layout_constraintTop_toBottomOf="@+id/new_user_edName" />
 
         <Button
-            android:id="@+id/login_btnLogin"
+            android:id="@+id/new_user_btnnew_user"
             android:layout_width="150dp"
             android:layout_height="45dp"
-            android:layout_below="@+id/login_edUserPassword"
+            android:layout_below="@+id/new_user_edUserPassword"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:background="@color/white"
-            android:text="@string/login_sign_in_btn_text"
+            android:text="@string/login_sign_up_btn_text"
             android:textColor="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_edUserPassword"
+            app:layout_constraintTop_toBottomOf="@+id/new_user_edUserPassword"
             app:layout_constraintVertical_bias="0.12" />
 
         <ImageView
@@ -117,4 +146,3 @@
 
 
 </RelativeLayout>
-

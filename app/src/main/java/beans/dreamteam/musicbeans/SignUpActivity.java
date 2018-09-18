@@ -18,34 +18,36 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import beans.dreamteam.musicbeans.utils.*;
 
-import java.lang.annotation.Documented;
-import java.util.Date;
+import beans.dreamteam.musicbeans.R;
+import beans.dreamteam.musicbeans.utils.CustomValidator;
+import beans.dreamteam.musicbeans.utils.DBConnection;
 
-public class LoginActivity extends AppCompatActivity{
+public class SignUpActivity extends AppCompatActivity {
     public EditText edUserName;
+    public EditText edName;
     public EditText edUserPassword;
-    private waitinDialog waitingDialog;
+    private waitinDialogSign waitingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_logon);
-        edUserName = findViewById(R.id.login_edUserName);
-        edUserPassword = findViewById(R.id.login_edUserPassword);
-        Button btnLogin = findViewById(R.id.login_btnLogin);
-        waitingDialog = new waitinDialog(this);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_new_user);
+        edUserName = findViewById(R.id.new_user_edUserName);
+        edName = findViewById(R.id.new_user_edName);
+        edUserPassword = findViewById(R.id.new_user_edUserPassword);
+        Button btnNewUser = findViewById(R.id.new_user_btnnew_user);
+        waitingDialog = new waitinDialogSign(this);
+        btnNewUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Login();
+                signUp();
             }
         });
         edUserPassword.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    Login();
+                    signUp();
                 }
                 return false;
             }
@@ -54,17 +56,18 @@ public class LoginActivity extends AppCompatActivity{
     public void onResponse(boolean result){
         waitingDialog.dismiss();
         if(result){
-            Toast.makeText(this,"LogIn Exitoso", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Creación de usuario exitosa", Toast.LENGTH_LONG).show();
+            finish();
         }
         else{
-            Toast.makeText(this, "Intento de LogIn Invalido", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Intento de creación de usuario invalido", Toast.LENGTH_LONG).show();
         }
     }
     //region Dialogs
-    private class waitinDialog extends Dialog {
+    private class waitinDialogSign extends Dialog {
         Activity activity;
 
-        public waitinDialog(Activity context) {
+        public waitinDialogSign(Activity context) {
             super(context);
             activity = context;
         }
@@ -92,19 +95,21 @@ public class LoginActivity extends AppCompatActivity{
     //endregion
 
     //region async tasks
-    private class MyAsyncTask extends AsyncTask<Void, Void, Boolean> {
+    private class MyAsyncTaskSign extends AsyncTask<Void, Void, Boolean> {
 
-        private LoginActivity mCallback;
+        private SignUpActivity mCallback;
         private String user;
         private String password;
-        public MyAsyncTask(LoginActivity callback, String user, String password) {
+        private String name;
+        public MyAsyncTaskSign(SignUpActivity callback,String name, String user, String password) {
             mCallback = callback;
             this.user = user;
             this.password = password;
+            this.name = name;
         }
         @Override
         protected Boolean doInBackground(Void... params) {
-            return DBConnection.login(user,password);
+            return DBConnection.signup(user,name,password);
         }
         @Override
         protected void onPostExecute(Boolean result) {
@@ -124,13 +129,17 @@ public class LoginActivity extends AppCompatActivity{
         }
     }
     //region Request Methods
-    private void Login() {
+    private void signUp() {
         try {
             boolean usernameError = CustomValidator.basicValidation(this, edUserName, 5);
             boolean passwordError = CustomValidator.basicValidation(this, edUserPassword, 6);
             if (!usernameError && !passwordError) {
                 waitingDialog.show();
-                new MyAsyncTask(this, edUserName.getText().toString(), edUserPassword.getText().toString()).execute();
+                new MyAsyncTaskSign(this, edName.getText().toString() ,edUserName.getText().toString(), edUserPassword.getText().toString()).execute();
+            }
+            else{
+                Toast.makeText(this, "Intento de creacion de usuario invalido", Toast.LENGTH_LONG).show();
+
             }
         } catch (Exception ex) {
             waitingDialog.dismiss();

@@ -21,6 +21,12 @@
         <activity android:name="beans.dreamteam.musicbeans.LoginActivity">
 
         </activity>
+        <activity android:name="beans.dreamteam.musicbeans.OptionActivity">
+
+    </activity>
+        <activity android:name="beans.dreamteam.musicbeans.SignUpActivity">
+
+        </activity>
     </application>
 
 </manifest>
