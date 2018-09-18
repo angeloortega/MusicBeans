@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/waitingdialog_maintitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|left"
+            android:paddingTop="20dp"
+            android:paddingLeft="20dp"
+            android:paddingBottom="20dp"
+            android:text="@string/waiting_dialog_title"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:background="@color/colorPrimary"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="4dip"
+            android:layout_marginBottom="0dp">
+        </View>
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="15dp"
+            android:indeterminate="false" />
+
+    </LinearLayout>
+
+</RelativeLayout>

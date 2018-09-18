@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="350dp"
+        android:layout_gravity="top"
+        android:background="@drawable/rounded_bg"
+        android:gravity="bottom|center_horizontal"
+        android:orientation="vertical"
+        android:id="@+id/splash_llContainer">
+
+        <ImageView
+            android:id="@+id/splash_visa_logo"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginBottom="20dp"
+            android:contentDescription="@drawable/music_beans_logo"
+            android:src="@drawable/music_beans_logo" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="80dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@android:color/white" >
+        </View>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="bottom"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        android:id="@+id/splash_llContainer2">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center_horizontal"
+            android:text="@string/version"
+            android:textColor="@color/colorPrimaryDark" />
+
+    </LinearLayout>
+
+</LinearLayout>
