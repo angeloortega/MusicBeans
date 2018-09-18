@@ -27,6 +27,9 @@
         <activity android:name="beans.dreamteam.musicbeans.SignUpActivity">
 
         </activity>
+        <activity android:name="beans.dreamteam.musicbeans.MainActivity">
+
+        </activity>
     </application>
 
 </manifest>
