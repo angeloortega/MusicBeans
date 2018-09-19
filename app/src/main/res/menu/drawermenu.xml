@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/configuraci_n" android:icon="@drawable/ic_settings_black_24dp" android:id="@+id/menu_drawer_settings"/>
+
+    <item android:title="@string/cerrar_sesi_n" android:icon="@drawable/ic_exit_to_app_black_24dp" android:id="@+id/menu_drawer_logout"/>
+
+
+</menu>

@@ -9,7 +9,7 @@ public class Evento {
     private float precio;
     private Date fchPublicacion;
     private Date fchEvento;
-    private byte[] foto;
+    private String foto;
 
     public int getIdEvento() {
         return idEvento;
@@ -59,11 +59,11 @@ public class Evento {
         this.fchEvento = fchEvento;
     }
 
-    public byte[] getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(byte[] foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 }

@@ -9,8 +9,21 @@ public class Noticia {
     private String titulo;
     private String cuerpo;
     private Date fecha;
-    private byte[] foto;
+    private String foto;
     private ArrayList<Comentario> comentarios;
+
+    public Noticia(int idNoticia, int idBanda, String titulo, String cuerpo, Date fecha, String foto, ArrayList<Comentario> comentarios) {
+        this.idNoticia = idNoticia;
+        this.idBanda = idBanda;
+        this.titulo = titulo;
+        this.cuerpo = cuerpo;
+        this.fecha = fecha;
+        this.foto = foto;
+        this.comentarios = comentarios;
+    }
+
+    public Noticia() {
+    }
 
     public ArrayList<Comentario> getComentarios() {
         return comentarios;
@@ -60,11 +73,11 @@ public class Noticia {
         this.fecha = fecha;
     }
 
-    public byte[] getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(byte[] foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 }

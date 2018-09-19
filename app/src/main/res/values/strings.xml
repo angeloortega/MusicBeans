@@ -18,6 +18,12 @@
     <string name="login_sign_in_btn_text">Iniciar Sesión</string>
     <string name="login_sign_up_btn_text">Crear Nuevo Usuario</string>
     <string name="waiting_dialog_title">Por favor espere…</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="musicbeans_user">MUSIC|BEANS User</string>
+    <string name="cerrar_sesi_n">Cerrar Sesión</string>
+    <string name="configuraci_n">Configuración</string>
+    <string name="logut_success">Se cerró la sesión exitosamente</string>
 
 
 </resources>

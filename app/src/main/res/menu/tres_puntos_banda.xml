@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Crear Noticia"
+    android:id="@+id/adminCrear"></item>
+    <item android:title="Crear Evento"
+        android:id="@+id/adminCrearEvento"></item>
+    <item android:title="Eliminar Noticia"
+        android:id="@+id/adminEliminar"></item>
+</menu>

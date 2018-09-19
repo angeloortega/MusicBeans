@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Crear Banda"
+        android:id="@+id/CrearBandaAdmin"></item>
+    <item android:title="Eliminar Usuario"
+        android:id="@+id/EliminarUsuarioAdmin"></item>
+    <item android:title="Crear Noticia"
+        android:id="@+id/CrearNoticiaAdmin"></item>
+    <item android:title="Eliminar"
+        android:id="@+id/EliminarNoticiaAdmin"></item>
+
+</menu>

@@ -18,9 +18,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import beans.dreamteam.musicbeans.model.Carrito;
+import beans.dreamteam.musicbeans.model.Evento;
+import beans.dreamteam.musicbeans.model.Noticia;
+import beans.dreamteam.musicbeans.model.Usuario;
 import beans.dreamteam.musicbeans.utils.*;
 
 import java.lang.annotation.Documented;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class LoginActivity extends AppCompatActivity{
@@ -54,7 +60,8 @@ public class LoginActivity extends AppCompatActivity{
     public void onResponse(boolean result){
         waitingDialog.dismiss();
         if(result){
-            Toast.makeText(this,"LogIn Exitoso", Toast.LENGTH_LONG).show();
+
+            Toast.makeText(this,"Bienvenido " + Singleton.getInstance().usuarioLogeado.getNombre(), Toast.LENGTH_LONG).show();
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
@@ -107,7 +114,37 @@ public class LoginActivity extends AppCompatActivity{
         }
         @Override
         protected Boolean doInBackground(Void... params) {
-            return DBConnection.login(user,password);
+             boolean result = DBConnection.login(user,password);
+             if(result) {
+                 ArrayList<Integer> idFavoritos;
+                 Usuario usuario = DBConnection.getUsuario(user, password);
+                 Singleton.getInstance().usuarioLogeado = usuario;
+
+                 if(usuario.getTipo().equals("administrador")){
+                     idFavoritos = DBConnection.getAllUsers(usuario.getIdUsuario());
+                 }
+
+                else{
+                     idFavoritos = DBConnection.getFavoritos(usuario.getIdUsuario());
+                     idFavoritos.add(usuario.getIdUsuario());
+                 }
+                 ArrayList<Usuario> favoritos = new ArrayList<>();
+                 ArrayList<Noticia> noticias = new ArrayList<>();
+                 ArrayList<Evento> eventos = new ArrayList<>();
+                 for(Integer i: idFavoritos){
+                     favoritos.add(DBConnection.getUsuario(i));
+                     noticias.addAll(DBConnection.getNoticias(i));
+                     eventos.addAll(DBConnection.getEventos(i));
+                 }
+                 Singleton.getInstance().favoritos = favoritos;
+                 Singleton.getInstance().noticias = noticias;
+                 Singleton.getInstance().eventos = eventos;
+                 Singleton.getInstance().carrito = DBConnection.getCarrito(Singleton.getInstance().usuarioLogeado.getIdUsuario());
+
+             }
+
+             return result;
+
         }
         @Override
         protected void onPostExecute(Boolean result) {

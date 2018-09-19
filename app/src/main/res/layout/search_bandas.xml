@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".SearchFragment">
+
+    <ListView
+        android:id="@+id/listViewBusqueda"
+        android:layout_width="325dp"
+        android:layout_height="387dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="13dp" />
+
+    <TextView
+        android:id="@+id/searchResultsTV"
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/listViewBusqueda"
+        android:layout_marginTop="76dp"
+        android:text="Search Results"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:layout_alignLeft="@+id/listViewBusqueda" />
+
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="52dp"
+        android:layout_height="59dp"
+        android:layout_above="@+id/searchResultsTV"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="-76dp"
+        android:layout_marginEnd="59dp"
+        android:background="@drawable/ic_search"
+        android:backgroundTint="@color/colorHint" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="217dp"
+        android:id="@+id/queryEntry"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/listViewBusqueda"
+        android:layout_marginTop="13dp"
+        android:layout_below="@+id/searchResultsTV">
+
+        <android.support.design.widget.TextInputEditText
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Search"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
+
+</RelativeLayout>

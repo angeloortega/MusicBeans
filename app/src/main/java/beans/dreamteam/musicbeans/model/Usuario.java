@@ -11,7 +11,7 @@ public class Usuario {
     private String descripcion;
     private String genero;
     private Integer anhoFundacion;
-    private byte[] foto;
+    private String foto;
     private ArrayList<Noticia> noticias;
     private ArrayList<Evento> eventos;
     private ArrayList<Articulo> articulos;
@@ -19,7 +19,7 @@ public class Usuario {
     private Muestra muestra;
     private Carrito carrito;
 
-    public Usuario(int idUsuario, String nombre, String correo, String contrasenha, String tipo, String descripcion, String genero, Integer anhoFundacion, byte[] foto) {
+    public Usuario(int idUsuario, String nombre, String correo, String contrasenha, String tipo, String descripcion, String genero, Integer anhoFundacion, String foto) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.correo = correo;
@@ -95,11 +95,11 @@ public class Usuario {
         this.anhoFundacion = anhoFundacion;
     }
 
-    public byte[] getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(byte[] foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 

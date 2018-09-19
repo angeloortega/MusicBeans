@@ -12,9 +12,9 @@ public class Articulo {
     private int ctdDisponible;
     private Date fechaPublicacion;
     private Integer cantidadComprada;
-    private byte[] foto;
+    private String foto;
 
-    public Articulo(int idBanda,int idArticulo, String nombre, String categoria, String descripcion, float precio, int ctdDisponible, Date fechaPublicacion, Integer cantidadComprada, byte[] foto) {
+    public Articulo(int idBanda,int idArticulo, String nombre, String categoria, String descripcion, float precio, int ctdDisponible, Date fechaPublicacion, Integer cantidadComprada, String foto) {
         this.idBanda = idBanda;
         this.idArticulo = idArticulo;
         this.nombre = nombre;
@@ -99,11 +99,11 @@ public class Articulo {
         this.fechaPublicacion = fechaPublicacion;
     }
 
-    public byte[] getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(byte[] foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 }

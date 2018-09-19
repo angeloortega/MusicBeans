@@ -14,11 +14,12 @@
 
     <ImageView android:layout_height="match_parent"
         android:layout_width="wrap_content"
-        android:paddingLeft="-20dp"
         android:id="@+id/tv_header_title"
         tools:ignore="RtlSymmetry"
-        android:paddingStart="-20dp"
-        android:src="@drawable/music_beans_logo"
+        android:src="@drawable/texto_logo"
+        android:adjustViewBounds="true"
+        android:maxWidth="200dp"
+        android:maxHeight="42dp"
         android:scaleType="fitCenter"
         android:layout_gravity="center"/>
 
